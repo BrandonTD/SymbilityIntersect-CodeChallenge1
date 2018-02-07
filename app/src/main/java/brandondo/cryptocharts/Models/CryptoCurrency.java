@@ -4,13 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class CryptoCurrency {
     @SerializedName("Id")
-    String id = "";
+    private String id = "";
 
     @SerializedName("Name")
-    String name = "";
+    private String name = "";
 
     @SerializedName("CoinName")
-    String coinName = "";
+    private String coinName = "";
+
+    private Double price = null;
+
+    private boolean isFavourited = false;
+
+    public boolean isFavourited() {
+        return isFavourited;
+    }
+
+    public void toggleFavourited() {
+        isFavourited = !isFavourited;
+    }
 
     public String getId() {
         return id;
@@ -34,5 +46,13 @@ public class CryptoCurrency {
 
     public void setCoinName(String coinName) {
         this.coinName = coinName;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 }
