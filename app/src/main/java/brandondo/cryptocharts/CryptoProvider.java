@@ -30,7 +30,8 @@ public class CryptoProvider {
 
     public static CryptoProvider getInstance() {
         if (cryptoProvider == null) {
-            return new CryptoProvider();
+            cryptoProvider = new CryptoProvider();
+            return cryptoProvider;
         }
 
         return cryptoProvider;
@@ -42,7 +43,7 @@ public class CryptoProvider {
         serviceManager.getCoins()
                 .enqueue(new Callback<CryptoResponse>() {
 
-                    // this does not run on the main thread
+                    // Retrofit performs this in a worker thread.
                     @Override
                     public void onResponse(Call<CryptoResponse> call, Response<CryptoResponse> response) {
                         if (response.isSuccessful()) {
