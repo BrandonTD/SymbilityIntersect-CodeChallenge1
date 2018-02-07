@@ -16,14 +16,14 @@
                 android:id="@+id/currency_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="22sp"
+                android:textSize="18sp"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/currency_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"/>
+                android:textSize="14sp"/>
 
         </LinearLayout>
 
@@ -31,13 +31,14 @@
             android:id="@+id/favourite_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:layout_gravity="end">
 
             <ImageView
                 android:id="@+id/filled_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
+                android:padding="10dp"
                 android:src="@drawable/filled_star"
                 android:visibility="invisible" />
 
@@ -45,7 +46,7 @@
                 android:id="@+id/unfilled_star"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
+                android:padding="10dp"
                 android:src="@drawable/unfilled_star"
                 android:visibility="visible" />
 

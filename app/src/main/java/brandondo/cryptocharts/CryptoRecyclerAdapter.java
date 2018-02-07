@@ -12,11 +12,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import brandondo.cryptocharts.Models.CryptoCurrency;
+import brandondo.cryptocharts.Utility.OnFavouritedClickedListener;
 
 import static android.view.View.GONE;
 
 public class CryptoRecyclerAdapter extends RecyclerView.Adapter<CryptoRecyclerAdapter.CryptoViewHolder> {
     private List<CryptoCurrency> data;
+    private OnFavouritedClickedListener favouritedClickedListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -28,7 +30,7 @@ public class CryptoRecyclerAdapter extends RecyclerView.Adapter<CryptoRecyclerAd
         ImageView notFavouritedStar;
         FrameLayout favouriteButton;
 
-        public CryptoViewHolder(View view) {
+        public CryptoViewHolder(View view, final OnFavouritedClickedListener listener) {
             super(view);
             currencyName = (TextView) view.findViewById(R.id.currency_name);
             currencyPrice = (TextView) view.findViewById(R.id.currency_price);
@@ -38,10 +40,7 @@ public class CryptoRecyclerAdapter extends RecyclerView.Adapter<CryptoRecyclerAd
             favouriteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    CryptoProvider.getInstance()
-                            .getCurrencyData()
-                            .get(getAdapterPosition())
-                            .toggleFavourited();
+                    listener.onClick(view, getAdapterPosition());
                 }
             });
         }
@@ -56,12 +55,12 @@ public class CryptoRecyclerAdapter extends RecyclerView.Adapter<CryptoRecyclerAd
     // Create new views (invoked by the layout manager)
     @Override
     public CryptoRecyclerAdapter.CryptoViewHolder onCreateViewHolder(ViewGroup parent,
-                                                   int viewType) {
+                                                                     int viewType) {
         // create a new view
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_crypto_currency, parent, false);
         // set the view's size, margins, paddings and layout parameters
-        CryptoViewHolder viewHolder = new CryptoViewHolder(view);
+        CryptoViewHolder viewHolder = new CryptoViewHolder(view, favouritedClickedListener);
         return viewHolder;
     }
 
@@ -80,18 +79,28 @@ public class CryptoRecyclerAdapter extends RecyclerView.Adapter<CryptoRecyclerAd
             viewHolder.currencyPrice.setText(String.valueOf(currencyPrice));
         }
 
-        if(isFavourited) {
-            viewHolder.notFavouritedStar.setVisibility(GONE);
-            viewHolder.favouritedStar.setVisibility(View.VISIBLE);
-        } else {
-            viewHolder.favouritedStar.setVisibility(GONE);
-            viewHolder.notFavouritedStar.setVisibility(View.VISIBLE);
-        }
+        updateFavouriteImage(viewHolder.favouriteButton, isFavourited);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return data.size();
+    }
+
+    public void setOnFavouriteClickedListener(OnFavouritedClickedListener listener) {
+        this.favouritedClickedListener = listener;
+    }
+
+    public void updateFavouriteImage(FrameLayout view, boolean isFavourited) {
+        ImageView favouritedStar = (ImageView) view.findViewById(R.id.filled_star);
+        ImageView notFavouritedStar = (ImageView) view.findViewById(R.id.unfilled_star);
+        if (isFavourited) {
+            notFavouritedStar.setVisibility(GONE);
+            favouritedStar.setVisibility(View.VISIBLE);
+        } else {
+            favouritedStar.setVisibility(GONE);
+            notFavouritedStar.setVisibility(View.VISIBLE);
+        }
     }
 }
