@@ -44,6 +44,7 @@ public class CryptoProvider {
 
     public void getCryptoData() {
         loadedData = 0;
+        currencyData.clear();
 
         // Get coins then use coins to get prices.
         serviceManager.getCoins()
