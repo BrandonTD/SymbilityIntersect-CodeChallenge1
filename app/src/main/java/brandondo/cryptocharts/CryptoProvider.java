@@ -22,10 +22,12 @@ public class CryptoProvider {
     private LoadCryptoListener loadCryptoListener;
     private int loadedData;
     private int numCurrencies;
+    private int numFavourited;
 
     private CryptoProvider() {
         serviceManager = ServiceManager.getInstance();
         currencyData = new ArrayList<>();
+        numFavourited = 0;
     }
 
     public static CryptoProvider getInstance() {
@@ -111,9 +113,16 @@ public class CryptoProvider {
         CryptoCurrency currency = currencyData.get(position);
         currency.toggleFavourited();
 
-        if (currency.isFavourited() && position != 0) {
+        if (currency.isFavourited()) {
+            numFavourited++;
+            if (position != 0) {
+                currencyData.remove(position);
+                currencyData.add(0, currency);
+            }
+        } else {
+            numFavourited--;
             currencyData.remove(position);
-            currencyData.add(0, currency);
+            currencyData.add(numFavourited, currency);
         }
     }
 }

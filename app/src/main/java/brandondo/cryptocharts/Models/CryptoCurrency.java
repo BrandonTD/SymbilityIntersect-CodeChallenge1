@@ -36,16 +36,8 @@ public class CryptoCurrency {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getCoinName() {
         return coinName;
-    }
-
-    public void setCoinName(String coinName) {
-        this.coinName = coinName;
     }
 
     public Double getPrice() {

@@ -1,13 +1,11 @@
 package brandondo.cryptocharts;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
-
-import java.util.function.Function;
 
 import brandondo.cryptocharts.Models.CryptoCurrency;
 import brandondo.cryptocharts.Utility.OnFavouritedClickedListener;
@@ -33,7 +31,6 @@ public class CryptoActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        // specify an adapter
         mAdapter = new CryptoRecyclerAdapter(cryptoProvider.getCurrencyData());
         mAdapter.setOnFavouriteClickedListener(new OnFavouritedClickedListener() {
             @Override
@@ -44,7 +41,7 @@ public class CryptoActivity extends AppCompatActivity {
                                 .getCurrencyData()
                                 .get(position);
                 cryptoProvider.toggleFavourited(position);
-                mAdapter.updateFavouriteImage((FrameLayout)v, currency.isFavourited());
+                mAdapter.updateFavouriteImage((FrameLayout) v, currency.isFavourited());
                 mAdapter.notifyDataSetChanged();
             }
         });

@@ -29,7 +29,8 @@ public class ServiceManager {
 
     public static ServiceManager getInstance() {
         if (serviceManager == null) {
-            return new ServiceManager();
+            serviceManager = new ServiceManager();
+            return serviceManager;
         }
 
         return serviceManager;

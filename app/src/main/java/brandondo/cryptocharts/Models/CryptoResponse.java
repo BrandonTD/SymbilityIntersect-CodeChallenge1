@@ -17,35 +17,8 @@ public class CryptoResponse {
     @SerializedName("Data")
     private HashMap<String, CryptoCurrency> currencyList = null;
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getBaseImageUrl() {
-        return baseImageUrl;
-    }
-
-    public void setBaseImageUrl(String baseImageUrl) {
-        this.baseImageUrl = baseImageUrl;
-    }
-
-    public String getBaseLinkUrl() {
-        return baseLinkUrl;
-    }
-
-    public void setBaseLinkUrl(String baseLinkUrl) {
-        this.baseLinkUrl = baseLinkUrl;
-    }
-
     public HashMap<String, CryptoCurrency> getCurrencyList() {
         return currencyList;
     }
 
-    public void setCurrencyList(HashMap<String, CryptoCurrency> currencyList) {
-        this.currencyList = currencyList;
-    }
 }
