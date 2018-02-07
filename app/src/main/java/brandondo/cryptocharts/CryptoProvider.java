@@ -114,7 +114,7 @@ public class CryptoProvider {
     public void setLoadCryptoListener(LoadCryptoListener loadCryptoListener) {
         this.loadCryptoListener = loadCryptoListener;
     }
-    
+
     public void toggleFavourited(int position) {
         CryptoCurrency currency = currencyData.get(position);
         currency.toggleFavourited();
