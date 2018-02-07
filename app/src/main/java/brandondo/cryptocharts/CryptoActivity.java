@@ -8,8 +8,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import brandondo.cryptocharts.Models.CryptoCurrency;
+import brandondo.cryptocharts.UI.CryptoRecyclerAdapter;
 import brandondo.cryptocharts.Utility.OnFavouritedClickedListener;
 
+/**
+ * Main activity with currency recycler view.
+ */
 public class CryptoActivity extends AppCompatActivity {
 
     private CryptoProvider cryptoProvider;

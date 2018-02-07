@@ -8,6 +8,9 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * Singleton service manager that handles all http requests.
+ */
 public class ServiceManager {
     private static ServiceManager serviceManager;
     private CoinService coinService;
@@ -23,6 +26,7 @@ public class ServiceManager {
                 // Important to set a client on the build to prevent .build() from making new ones
                 .client(client);
 
+        // Different service for each api since they have different base urls.
         priceService = retrofitBuilder.baseUrl(PRICE_URL).build().create(PriceService.class);
         coinService = retrofitBuilder.baseUrl(COIN_URL).build().create(CoinService.class);
     }

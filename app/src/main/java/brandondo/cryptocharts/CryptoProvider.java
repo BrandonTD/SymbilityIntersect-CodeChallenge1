@@ -14,7 +14,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
+/**
+ * Singleton crypto provider that keeps track of all currency instances.
+ * Also delegates service calls to the service manager.
+ */
 public class CryptoProvider {
     private static CryptoProvider cryptoProvider = null;
     private ServiceManager serviceManager;
@@ -42,6 +45,7 @@ public class CryptoProvider {
     public void getCryptoData() {
         loadedData = 0;
 
+        // Get coins then use coins to get prices.
         serviceManager.getCoins()
                 .enqueue(new Callback<CryptoResponse>() {
 
@@ -53,6 +57,7 @@ public class CryptoProvider {
                             currencies.addAll(response.body().getCurrencyList().values());
                             numCurrencies = currencies.size();
 
+                            // Get the price for each currency.
                             for (CryptoCurrency currency : currencies) {
                                 Log.d("GetCryptoData", "Successful: " + currency.getName());
                                 retrieveCurrencyPrice(currency);
@@ -72,10 +77,10 @@ public class CryptoProvider {
         serviceManager.getPrices(currency.getName(), "CAD")
                 .enqueue(new Callback<HashMap<String, Double>>() {
 
-                    // this does not run on the main thread
                     @Override
                     public void onResponse(Call<HashMap<String, Double>> call, Response<HashMap<String, Double>> response) {
                         if (response.isSuccessful()) {
+                            //We are only interested in the CAD conversion.
                             Double price = response.body().get("CAD");
                             Log.d("GetCryptoPrice", "Successful: " + currency.getName() + " : " + price);
                             currency.setPrice(price);
@@ -93,6 +98,7 @@ public class CryptoProvider {
                 });
     }
 
+    // Once all queries have finished, notify to start main activity.
     private void handleLoadDataFinish() {
         loadedData += 1;
         Log.d("data load finish", "" + currencyData.size());
@@ -108,7 +114,7 @@ public class CryptoProvider {
     public void setLoadCryptoListener(LoadCryptoListener loadCryptoListener) {
         this.loadCryptoListener = loadCryptoListener;
     }
-
+    
     public void toggleFavourited(int position) {
         CryptoCurrency currency = currencyData.get(position);
         currency.toggleFavourited();

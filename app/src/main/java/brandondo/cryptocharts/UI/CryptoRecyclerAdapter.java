@@ -1,4 +1,4 @@
-package brandondo.cryptocharts;
+package brandondo.cryptocharts.UI;
 
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import brandondo.cryptocharts.Models.CryptoCurrency;
+import brandondo.cryptocharts.R;
 import brandondo.cryptocharts.Utility.OnFavouritedClickedListener;
 
 import static android.view.View.GONE;
@@ -83,6 +84,7 @@ public class CryptoRecyclerAdapter extends RecyclerView.Adapter<CryptoRecyclerAd
         this.favouritedClickedListener = listener;
     }
 
+    // update the favourite button image.
     public void updateFavouriteImage(FrameLayout view, boolean isFavourited) {
         ImageView favouritedStar = (ImageView) view.findViewById(R.id.filled_star);
         ImageView notFavouritedStar = (ImageView) view.findViewById(R.id.unfilled_star);

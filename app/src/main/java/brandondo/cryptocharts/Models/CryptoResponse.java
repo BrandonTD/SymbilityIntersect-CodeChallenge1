@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
 
+/**
+ * Model class for a http response
+ */
 public class CryptoResponse {
     @SerializedName("Response")
     private String status = "";

@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import brandondo.cryptocharts.Utility.LoadCryptoListener;
 import brandondo.cryptocharts.ViewModel.CryptoViewModel;
 
+/**
+ * Activity for splash screen on load/boot up.
+ */
 public class SplashActivity extends AppCompatActivity {
 
     CryptoViewModel viewModel;

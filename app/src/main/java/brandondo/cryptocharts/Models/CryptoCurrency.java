@@ -2,6 +2,9 @@ package brandondo.cryptocharts.Models;
 
 import com.google.gson.annotations.SerializedName;
 
+/**
+ * Model class for a currency
+ */
 public class CryptoCurrency {
     @SerializedName("Id")
     private String id = "";
